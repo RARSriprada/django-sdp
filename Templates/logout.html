@@ -1,0 +1,28 @@
+<!-- base1.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Website</title>
+</head>
+<body>
+    <!-- Your website header -->
+
+    <!-- Navigation bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <!-- Other navigation links -->
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- Your website content -->
+
+    <!-- Your website footer -->
+</body>
+</html>

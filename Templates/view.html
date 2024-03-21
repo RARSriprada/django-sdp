@@ -1,0 +1,122 @@
+{% extends 'base1.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Style for the books container */
+    #books-container {
+        margin-top: 80px; /* Adjust margin top to make space for navbar */
+    }
+
+    /* Style for each book block */
+    .book-block {
+        border: 1px solid #ccc; /* Add border */
+        border-radius: 5px; /* Add border radius */
+        padding: 20px; /* Add padding */
+        margin-bottom: 20px; /* Add margin bottom */
+        background-color: white; /* Set background color */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+        display: flex; /* Use flexbox for layout */
+    }
+
+    .book-block h2 {
+        margin-top: 0; /* Remove default margin */
+        margin-bottom: 10px; /* Add margin bottom */
+    }
+
+    .book-block p {
+        margin: 5px 0; /* Add margin */
+    }
+
+    .availability-available {
+        color: green;
+    }
+
+    .availability-unavailable {
+        color: red;
+    }
+
+    .book-block a {
+        color: #007bff; /* Set link color */
+        text-decoration: none; /* Remove underline */
+        display: inline-block; /* Make link inline-block */
+        margin-top: 10px; /* Add margin top */
+    }
+
+    .book-details {
+        flex: 1; /* Take up remaining space */
+    }
+
+    .book-icon {
+        margin-left: 20px; /* Adjust margin as needed */
+    }
+
+    .book-block a:hover {
+        text-decoration: underline; /* Add underline on hover */
+    }
+
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("{% static 'img_1.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        filter: brightness(90%) blur(30px); /* Adjust brightness and blur */
+        z-index: -1;
+    }
+
+    /* Set text color to white */
+    h1, form {
+        color: white;
+    }
+
+    /* Set price to bold and in rupees */
+    .price {
+        font-weight: bold;
+    }
+</style>
+
+<div class="background"></div>
+<h1>Search Books</h1>
+
+<form method="GET">
+    <input type="text" name="q" placeholder="Search by title...">
+    <button type="submit">Search</button>
+</form>
+
+<form method="GET">
+    <select name="availability">
+        <option value="all" {% if availability_filter == 'all' %}selected{% endif %}>All</option>
+        <option value="Available" {% if availability_filter == 'Available' %}selected{% endif %}>Available</option>
+        <option value="Not Available" {% if availability_filter == 'Not Available' %}selected{% endif %}>Not Available</option>
+    </select>
+    <button type="submit">Apply Filter</button>
+</form>
+
+<div id="books-container">
+    <h1>Available Books:</h1>
+    {% for book in books %}
+    <div class="book-block">
+        <div class="book-details">
+            <h2>Title: {{ book.title }}</h2>
+            <p>Author: {{ book.author }}</p>
+            <p>Genre: {{ book.genre }}</p>
+            <p>Description: {{ book.description }}</p>
+            <p class="price">Price: ₹{{ book.Price }}</p>
+            <p class="{% if book.availability == 'Available' %}availability-available{% else %}availability-unavailable{% endif %}">Availability: {{ book.availability }}</p>
+            {% if book.availability == 'Available' %}
+                <a href="{% url 'cart' %}?book_name={{ book.title }}&author_name={{ book.author }}">Buy</a>
+            {% else %}
+                <a href="{{ pdfs_dir }}{{ book.pdf_filename }}" target="_blank">Read PDF</a>
+            {% endif %}
+        </div>
+        <div class="book-icon">
+            <img src="{% static 'icons/' %}{{ book.icon }}" alt="{{ book.title }} icon" style="width: 150px; height: 150px;">
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

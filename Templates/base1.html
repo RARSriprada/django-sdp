@@ -1,0 +1,104 @@
+<!-- base1.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Book Store</title>
+    <style>
+        /* Style for the navbar */
+        .navbar {
+            background-color: black; /* Setting the navbar color to black */
+            overflow: hidden;
+            padding: 20px; /* Adding padding to the navbar */
+            text-align: center; /* Centering the navbar contents */
+            position: relative; /* Setting the position to relative */
+        }
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: inline-block; /* Ensures all links occupy the same height */
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        /* Adjust the width to make links side by side */
+        .navbar a.home,
+        .navbar a.view,
+        .navbar a.cart,
+        .navbar a.logout,
+        .navbar a.orders,
+        .navbar a.Addbook
+         {
+            float: left;
+            font-size: 20px;
+            height: 100%; /* Ensures all links occupy the same height */
+        }
+        /* Style for the heading */
+        .navbar-heading {
+            color: white;
+            margin: 0 auto; /* Centering the heading */
+            padding: 0;
+            font-size: 36px; /* Heading font size */
+        }
+        /* Style for the content */
+        .content {
+            margin: 10px; /* Add some margin around the content */
+        }
+        /* New styles for the orders */
+        .orders {
+            position: relative;
+            top: 0;
+            right: 20px; /* Adjust this value to align the orders properly */
+            color: white;
+            text-align: right;
+            height: 100%; /* Ensures "My Orders" link occupies the same height */
+        }
+        .orders a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        .navbar a.orders {
+            float: right;
+            font-size: 20px;
+            height: 100%; /* Ensures all links occupy the same height */
+        }
+        .navbar a.whereabouts {
+            float: left;
+            font-size: 20px;
+            height: 100%; /* Ensures all links occupy the same height */
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <!-- Heading -->
+    <h1 class="navbar-heading">Online Book Store</h1>
+    <!-- Home link -->
+    <a href="{% url 'home' %}" class="home">Home</a>
+    <!-- View link -->
+    <a href="{% url 'view' %}" class="view">View</a>
+    <!-- Cart link -->
+    <a href="{% url 'cart' %}" class="cart">Cart</a>
+    <!-- Logout link -->
+    <a href="{% url 'logout' %}" class="logout">LogOut</a>
+    <!-- My Orders link -->
+
+     <a href="{% url 'whereabouts' %}" class="whereabouts">Where Abouts</a>
+    <a href="{% url 'Addbook' %}" class="Addbook">Add Book</a>
+</div>
+
+<div class="content">
+    {% block content %}
+    <!-- Default content -->
+    {% endblock %}
+</div>
+
+</body>
+</html>

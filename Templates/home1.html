@@ -1,0 +1,74 @@
+{% extends 'base1.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("{% static 'img_1.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        filter: brightness(90%) blur(50px); /* Adjust brightness and blur */
+        z-index: -1;
+    }
+
+    .content {
+        font-size: 20px; /* Increase font size */
+        color: white; /* Set text color to white */
+        font-family: 'Times New Roman', Times, serif; /* Change font family */
+        line-height: 1.5; /* Adjust line height for better readability */
+    }
+</style>
+
+<div class="background"></div>
+
+<div class="content">
+    <div class="container">
+        <h1>Welcome to Our Online Bookstore!</h1>
+
+        <!-- Beautiful Quotes Section -->
+        <div class="quotes">
+            <blockquote class="quote">
+                "Books are a uniquely portable magic." - Stephen King
+            </blockquote>
+            <blockquote class="quote">
+                "The more that you read, the more things you will know. The more that you learn, the more places you'll go." - Dr. Seuss
+            </blockquote>
+            <!-- Add more beautiful quotes here -->
+        </div>
+
+        <!-- Introduction to the Online Bookstore -->
+        <div class="intro">
+            <h2>Discover a World of Knowledge</h2>
+            <p>Explore our vast collection of books covering various genres including fiction, non-fiction, romance, mystery, and more. With our easy-to-use website, finding your next favorite book has never been easier!</p>
+            <p>Whether you're a book enthusiast, a casual reader, or someone looking for the perfect gift, our online bookstore has something for everyone.</p>
+            <p>Start your journey with us today and immerse yourself in the fascinating world of literature.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

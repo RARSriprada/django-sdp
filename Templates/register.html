@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Background styles */
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("{% static 'img_1.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        filter: brightness(90%) blur(30px); /* Adjust brightness and blur */
+        z-index: -1;
+    }
+
+    /* Container styles */
+    .container {
+        position: absolute;
+        top: 60%; /* Adjust the top position */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Form styles */
+    form {
+        margin-top: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 75%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    p {
+        margin-top: 20px;
+    }
+
+    p a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    p a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="background"></div>
+
+<div class="container">
+    <h1>Registration</h1>
+
+    {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+
+    <form method="post" autocomplete="off"> <!-- Add autocomplete="off" here -->
+        {% csrf_token %}
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required minlength="4" maxlength="50" autocomplete="off"><br> <!-- Add autocomplete="off" here -->
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required autocomplete="off"><br> <!-- Add autocomplete="off" here -->
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required minlength="8" autocomplete="new-password"><br> <!-- Add autocomplete="new-password" here -->
+        <label for="confirm_password">Confirm Password:</label><br>
+        <input type="password" id="confirm_password" name="confirm_password" required minlength="8" onchange="checkPasswordMatch()" autocomplete="new-password"><br> <!-- Add autocomplete="new-password" here -->
+        <div id="password-match-message" style="color: red; display: none;">Passwords do not match</div>
+        <button type="submit">Register</button>
+    </form>
+
+    <!-- Link to login page -->
+    <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+</div>
+
+<script>
+    function checkPasswordMatch() {
+        var password = document.getElementById("password").value;
+        var confirm_password = document.getElementById("confirm_password").value;
+
+        if (password != confirm_password) {
+            document.getElementById("password-match-message").style.display = "block";
+        } else {
+            document.getElementById("password-match-message").style.display = "none";
+        }
+    }
+</script>
+{% endblock %}

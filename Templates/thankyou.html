@@ -1,0 +1,50 @@
+{% extends 'base1.html' %}
+
+{% load static %}
+{% block content %}
+<style>
+    .thanku-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative; /* added */
+        z-index: 1; /* added */
+    }
+
+    h1, p {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .background {
+        position: absolute; /* changed to absolute */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("{% static 'img_1.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        filter: brightness(90%) blur(50px);
+        z-index: -1;
+    }
+</style>
+
+<div class="background"></div> <!-- added background div -->
+
+<div class="thanku-container">
+    <h1>Thank You for Your Purchase!</h1>
+    <p>Your order has been successfully placed.</p>
+    <p>We will process your order shortly.</p>
+</div>
+
+<script>
+    // Redirect to homepage after 50 seconds
+    setTimeout(function() {
+        window.location.href = "/";
+    }, 50000); // 50 seconds in milliseconds
+</script>
+{% endblock %}
